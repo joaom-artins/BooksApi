@@ -16,6 +16,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(Options=>Options.SerializerS
 
 builder.Services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IAuthorRepository,AuthorRepository>();
+builder.Services.AddScoped<IBookRepository,BookRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

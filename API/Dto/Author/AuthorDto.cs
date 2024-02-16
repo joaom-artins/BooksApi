@@ -11,6 +11,6 @@ namespace API.Dto.Author
     {
         public int Id { get; set; }
         public string Name { get; set; }=string.Empty;
-        public List<BookDto> Books { get; set; }
+        public List<BookDto> Books { get; set; }=[];
     }
 }
