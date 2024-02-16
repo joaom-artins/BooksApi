@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repository.Interfaces
 {
@@ -16,27 +17,43 @@ namespace API.Repository.Interfaces
             _context=context;
         }
 
-        public Task<List<Book>> GetAllAsync()
+        public async Task<List<Book>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Books.ToListAsync();
         }
 
-        public Task<Book?> GetById(int id)
+        public async Task<Book?> GetById(int id)
         {
-            throw new NotImplementedException();
+           var bookModel=await _context.Books.FirstOrDefaultAsync(x=>x.Id==id);
+           if(bookModel is null) return null;
+           return bookModel;
         }
-        public Task<Book> CreateAsync(Book book)
+        public async Task<Book?> CreateAsync(Book book)
         {
-            throw new NotImplementedException();
+            if(book is null) return null;
+            await _context.Books.AddAsync(book);
+            await _context.SaveChangesAsync();
+            return book;
         }
-        public Task<Book?> RemoveAsync(int id)
+        public async Task<Book?> RemoveAsync(int id)
         {
-            throw new NotImplementedException();
+            var bookModel=await _context.Books.FirstOrDefaultAsync(x=>x.Id==id);
+            if(bookModel is null) return null;
+            _context.Books.Remove(bookModel);
+            await _context.SaveChangesAsync();
+            return bookModel;
         }
 
-        public Task<Book?> UpdateAsync(int id, Book book)
+        public async Task<Book?> UpdateAsync(int id, Book book)
         {
-            throw new NotImplementedException();
+            var bookModel=await _context.Books.FirstOrDefaultAsync(x=>x.Id==id);
+            if(bookModel is null) return null;
+            bookModel.Pages=book.Pages;
+            bookModel.Title=book.Title;
+            bookModel.AuthorId=book.AuthorId;
+            bookModel.Description=bookModel.Description;
+            await _context.SaveChangesAsync();
+            return book;
         }
     }
 }

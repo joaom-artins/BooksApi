@@ -15,7 +15,7 @@ namespace API.Mapper
             {
                 Id=authorModel.Id,
                 Name=authorModel.Name,
-                Books=authorModel.Books
+                Books=authorModel.Books.Select(c=>c.ToBookDto()).ToList()
             };
         }
         public static Author ToAuthorFromAuthorDto(this AuthorCreatedDto authorDto)

@@ -20,12 +20,12 @@ namespace API.Repository
         }
         public async Task<List<Author>> GetAllAsync()
         {
-            return await _context.Authors.ToListAsync();
+            return await _context.Authors.Include(b=>b.Books).ToListAsync();
         }
 
         public async Task<Author?> GetByIdAsync(int id)
         {
-           var author=await _context.Authors.FirstOrDefaultAsync(x=>x.Id==id);
+           var author=await _context.Authors.Include(b=>b.Books).FirstOrDefaultAsync(x=>x.Id==id);
            if (author is null)return null;
            return author;
         }

@@ -136,3 +136,7 @@ C:\Users\joaom\OneDrive\Área de Trabalho\Arquivos\Arquivos importantes - Copia\
 C:\Users\joaom\OneDrive\Área de Trabalho\Arquivos\Arquivos importantes - Copia\C#\AulasYT\API\obj\Debug\net8.0\API.pdb
 C:\Users\joaom\OneDrive\Área de Trabalho\Arquivos\Arquivos importantes - Copia\C#\AulasYT\API\obj\Debug\net8.0\API.genruntimeconfig.cache
 C:\Users\joaom\OneDrive\Área de Trabalho\Arquivos\Arquivos importantes - Copia\C#\AulasYT\API\obj\Debug\net8.0\ref\API.dll
+C:\Users\joaom\OneDrive\Área de Trabalho\Arquivos\Arquivos importantes - Copia\C#\AulasYT\API\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\joaom\OneDrive\Área de Trabalho\Arquivos\Arquivos importantes - Copia\C#\AulasYT\API\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\joaom\OneDrive\Área de Trabalho\Arquivos\Arquivos importantes - Copia\C#\AulasYT\API\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\joaom\OneDrive\Área de Trabalho\Arquivos\Arquivos importantes - Copia\C#\AulasYT\API\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll

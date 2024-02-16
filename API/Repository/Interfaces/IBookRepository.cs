@@ -10,7 +10,7 @@ namespace API.Repository.Interfaces
     {
         Task<List<Book>> GetAllAsync();
         Task<Book?> GetById(int id);
-        Task<Book> CreateAsync(Book book);
+        Task<Book?> CreateAsync(Book book);
         Task<Book?> UpdateAsync(int id,Book book);
         Task<Book?> RemoveAsync(int id);
     }
