@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.Dto.Author;
 using API.Models;
 using API.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -28,9 +29,8 @@ namespace API.Repository
            if (author is null)return null;
            return author;
         }
-        public async Task<Author?> CreateAsync(Author author)
+        public async Task<Author> CreateAsync(Author author)
         {
-            if(author is null) return null;
             await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
             return author;
@@ -44,7 +44,7 @@ namespace API.Repository
             await _context.SaveChangesAsync();
             return author;
         }
-        public async Task<Author?> UpdateAsync(int id,Author author)
+        public async Task<Author?> UpdateAsync(int id,UpdateAuthorRequestDto author)
         {
             var authorModel=await _context.Authors.FirstOrDefaultAsync(x=>x.Id==id);
             if (authorModel is null)return null;
