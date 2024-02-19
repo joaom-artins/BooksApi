@@ -14,5 +14,6 @@ namespace API.Repository.Interfaces
         Task<Author> CreateAsync(Author author);
         Task<Author?> UpdateAsync(int id,UpdateAuthorRequestDto author);
         Task<Author?> DeleteAsync(int id);
+        Task<bool> AuthorExists(int id); 
      }
 }

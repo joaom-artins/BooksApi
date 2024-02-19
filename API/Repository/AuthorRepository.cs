@@ -52,5 +52,10 @@ namespace API.Repository
             await _context.SaveChangesAsync();
             return authorModel;
         }
+
+        public Task<bool> AuthorExists(int id)
+        {
+            return _context.Authors.AnyAsync(a=>a.Id==id);
+        }
     }
 }

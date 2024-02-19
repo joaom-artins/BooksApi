@@ -20,5 +20,15 @@ namespace API.Mapper
                 AuthorId=bookModel.AuthorId
             };
         }
+        public static Book ToBookFromCreate(this CreatedBookDto createdBookDto,int authorId)
+        {
+            return new Book
+            {
+                Title=createdBookDto.Title,
+                Description=createdBookDto.Description,
+                Pages=createdBookDto.Pages,
+                AuthorId=authorId
+            };
+        }
     }
 }
