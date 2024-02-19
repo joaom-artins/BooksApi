@@ -45,5 +45,12 @@ namespace API.Controllers
             await _BookRepo.CreateAsync(bookModel);
             return CreatedAtAction(nameof(GetById),new {Id=bookModel.Id},bookModel.ToBookDto());
          }
+         [HttpPut("{id}")]
+          public async Task<IActionResult> Put([FromRoute]int id,[FromBody]UpdateBookDto updateBookDto)
+          {
+            var bookModel=await _BookRepo.UpdateAsync(id,updateBookDto.ToBookFromUpdate());
+            if(bookModel is null) return NotFound();
+            return Ok(bookModel.ToBookDto());
+          }
     }
 }

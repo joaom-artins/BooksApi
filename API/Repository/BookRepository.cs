@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.Mapper;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -50,7 +51,6 @@ namespace API.Repository.Interfaces
             if(bookModel is null) return null;
             bookModel.Pages=book.Pages;
             bookModel.Title=book.Title;
-            bookModel.AuthorId=book.AuthorId;
             bookModel.Description=bookModel.Description;
             await _context.SaveChangesAsync();
             return book;

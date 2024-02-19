@@ -30,5 +30,14 @@ namespace API.Mapper
                 AuthorId=authorId
             };
         }
+         public static Book ToBookFromUpdate(this UpdateBookDto updateBookDto)
+        {
+            return new Book
+            {
+                Title=updateBookDto.Title,
+                Description=updateBookDto.Description,
+                Pages=updateBookDto.Pages,
+            };
+        }
     }
 }
