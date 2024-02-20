@@ -52,5 +52,12 @@ namespace API.Controllers
             if(bookModel is null) return NotFound();
             return Ok(bookModel.ToBookDto());
           }
+          [HttpDelete("{id}")]
+          public async Task<IActionResult> Delete([FromRoute]int id)
+          {
+            var bookModel=await _BookRepo.RemoveAsync(id);
+            if(bookModel is null) return NotFound();
+            return NoContent();
+          }
     }
 }
