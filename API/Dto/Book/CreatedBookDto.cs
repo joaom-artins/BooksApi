@@ -18,7 +18,5 @@ namespace API.Dto.Book
         public string Description { get; set;}=string.Empty;
         [Required]
         public int Pages { get; set; }
-        [Required]
-        public int AuthorId { get; set; }
     }
 }
