@@ -25,6 +25,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             var bookModel= await _BookRepo.GetAllAsync();
             if(bookModel is null) return NotFound();
             var bookDto=bookModel.Select(b=>b.ToBookDto());
@@ -33,6 +34,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute]int id)
         {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             var bookModel=await _BookRepo.GetById(id);
             if(bookModel is null) return NotFound();
             return Ok(bookModel.ToBookDto());
@@ -40,6 +42,7 @@ namespace API.Controllers
         [HttpPost("{authorId}")]
          public async Task<IActionResult> Post([FromRoute]int authorId,[FromBody]CreatedBookDto createdBookDto)
          {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             if(!await _AuthorRepo.AuthorExists(authorId)) return BadRequest();
             var bookModel=createdBookDto.ToBookFromCreate(authorId);
             await _BookRepo.CreateAsync(bookModel);
@@ -48,6 +51,7 @@ namespace API.Controllers
          [HttpPut("{id}")]
           public async Task<IActionResult> Put([FromRoute]int id,[FromBody]UpdateBookDto updateBookDto)
           {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             var bookModel=await _BookRepo.UpdateAsync(id,updateBookDto.ToBookFromUpdate());
             if(bookModel is null) return NotFound();
             return Ok(bookModel.ToBookDto());
@@ -55,6 +59,7 @@ namespace API.Controllers
           [HttpDelete("{id}")]
           public async Task<IActionResult> Delete([FromRoute]int id)
           {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             var bookModel=await _BookRepo.RemoveAsync(id);
             if(bookModel is null) return NotFound();
             return NoContent();

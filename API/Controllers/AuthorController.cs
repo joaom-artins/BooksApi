@@ -23,6 +23,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             var author=await _authorRepo.GetAllAsync();
             var authorDto=author.Select(s=>s.ToAuthorDto());
             return Ok(authorDto);
@@ -30,6 +31,7 @@ namespace API.Controllers
          [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute]int id)
         {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             var author=await _authorRepo.GetByIdAsync(id);
             if(author is null) return NotFound();
             return Ok(author.ToAuthorDto());
@@ -37,6 +39,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]AuthorCreatedDto authorDto)
         {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
            var authorModel=authorDto.ToAuthorFromAuthorDto();
            await _authorRepo.CreateAsync(authorModel);
            return CreatedAtAction(nameof(GetById),new{id=authorModel.Id},authorModel.ToAuthorDto());
@@ -45,6 +48,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromRoute]int id,[FromBody] UpdateAuthorRequestDto updateAuthorRequestDto)
         {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             var authorModel=await _authorRepo.UpdateAsync(id,updateAuthorRequestDto);
               if(authorModel is null) return NotFound();
 
@@ -54,6 +58,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             var authorModel= await _authorRepo.DeleteAsync(id);
             if(authorModel is null) return NotFound();
 
