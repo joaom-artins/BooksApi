@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dto.Author;
+using API.Helpers;
 using API.Mapper;
 using API.Models;
 using API.Repository.Interfaces;
@@ -21,10 +22,10 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]QueryAuthorObject query)
         {
             if(!ModelState.IsValid) return BadRequest(ModelState);
-            var author=await _authorRepo.GetAllAsync();
+            var author=await _authorRepo.GetAllAsync(query);
             var authorDto=author.Select(s=>s.ToAuthorDto());
             return Ok(authorDto);
         }

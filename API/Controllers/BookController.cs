@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dto.Book;
+using API.Helpers;
 using API.Mapper;
 using API.Models;
 using API.Repository.Interfaces;
@@ -23,10 +24,10 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] QueryBookObject query)
         {
             if(!ModelState.IsValid) return BadRequest(ModelState);
-            var bookModel= await _BookRepo.GetAllAsync();
+            var bookModel= await _BookRepo.GetAllAsync(query);
             if(bookModel is null) return NotFound();
             var bookDto=bookModel.Select(b=>b.ToBookDto());
             return Ok(bookDto);

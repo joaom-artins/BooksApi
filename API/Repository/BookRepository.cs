@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.Helpers;
 using API.Mapper;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +19,15 @@ namespace API.Repository.Interfaces
             _context=context;
         }
 
-        public async Task<List<Book>> GetAllAsync()
+        public async Task<List<Book>> GetAllAsync(QueryBookObject query)
         {
-            return await _context.Books.ToListAsync();
+            var books=  _context.Books.AsQueryable();
+
+            if(!string.IsNullOrWhiteSpace(query.Title))
+            {
+                books=books.Where(b=>b.Title.Contains(query.Title));
+            }
+            return await books.ToListAsync();
         }
 
         public async Task<Book?> GetById(int id)

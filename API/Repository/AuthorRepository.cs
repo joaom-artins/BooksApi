@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Dto.Author;
+using API.Helpers;
 using API.Models;
 using API.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +19,15 @@ namespace API.Repository
         {
             _context=context;
         }
-        public async Task<List<Author>> GetAllAsync()
+        public async Task<List<Author>> GetAllAsync(QueryAuthorObject query)
         {
-            return await _context.Authors.Include(b=>b.Books).ToListAsync();
+            var authors= _context.Authors.Include(b=>b.Books).AsQueryable();
+
+            if(!string.IsNullOrWhiteSpace(query.Name))
+            {
+                authors=authors.Where(a=>a.Name.Contains(query.Name));
+            }
+            return await authors.ToListAsync();
         }
 
         public async Task<Author?> GetByIdAsync(int id)
